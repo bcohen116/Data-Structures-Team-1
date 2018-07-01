@@ -1,0 +1,134 @@
+#include <iostream>
+#include <cstdlib>
+#include <math.h> 
+
+//Created by Alex Budke and Kaitlyn Woods on aug 29 2016
+
+//Class: Data structures
+//Homework 1, Problem 1 
+
+using namespace std;
+
+//Function to act as the calculator and choose the operation
+int calculate(int integer1, int integer2, char operation)
+{
+  int output;
+  
+  switch(operation)
+  {
+    case '+':
+      output = integer1+integer2;
+      break;
+    case '-':
+    	output = integer1-integer2;
+    	break;
+    case '*':
+    	output = integer1*integer2;
+    	break;
+    case '/':
+    	output = integer1/integer2;
+    	break;
+    case '%':
+      output = integer1%integer2;
+      break;
+    default:
+      cout << "Error: Invalid operation." << endl;
+      return 0;
+  }
+  
+  return output;
+}
+
+//Main function to write to the prompt and accept variables
+int main()
+{ 
+  int integer1, integer2;
+  char operation, do_another;
+  
+  start:
+  
+  cout << "    Welcome to DS_Team_1 Calculator." << endl;
+  cout << "  Input two integers and an operation (+, -, *, /, %)." << endl;
+  cout << "Integer 1: ";
+  cin >> integer1;
+  cout << "Integer 2: ";
+  cin >> integer2;
+  cout << "Operation: ";
+  cin >> operation;
+  
+  
+  cout << integer1 << " " << operation << " " << integer2 << " = "<< calculate(integer1, integer2, operation) << endl;
+  
+  
+  cout << "Do another problem? (Y or N) " << endl;
+  cin >> do_another;
+  
+  if(do_another == 'Y' || do_another == 'y'){
+    goto start;
+  }
+  
+}
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////// Problem 2 Starts Here
+
+
+
+
+
+
+//Worked on by Ben Cohen and Jose Banda August 29,2016
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <cstdlib> //for exit()
+
+using namespace std;
+
+int calculation(int input);
+
+int main(){
+	//Setup
+	cout << "This program will compute some calculations for some numbers that will be entered by the user." << endl;
+	cout << "Input an integer N > 0: ";
+	int input;
+	cin >> input;
+	int incorrect = 0;
+	//Error Checking
+	if (!cin){
+		cout << "Error: You typed a letter. Program will end" << endl;
+		return 0;
+	}
+  	while (input <= 0 && incorrect < 4){
+		cout << "Your input was incorrect, enter N > 0! \nEnter N: ";
+		cin >> input;
+		incorrect++;
+	}
+	if (input <= 0 && incorrect == 4){
+		cout << "Error: You entered incorrectly 5 times, the program will now end." << endl;
+		return 0;
+}
+	//calculations and output
+	cout << "Your input is: " << input << endl;
+	cout << "The sum of the first " << input << " Positive integers is: " << calculation(input)<< endl;
+	long double factorial = input;
+	for (int y = input - 1; y > 0; y--){
+		factorial *= y;
+	}
+	cout << "The factorial of " << input << " is: " << factorial << endl;
+	exit(1);
+  return 0;
+}
+//used in calculations
+int calculation(int input){
+  int sum = 0;
+	for (int x = input; x > 0; x--){
+		sum += x;
+	}
+	return sum;
+}
+

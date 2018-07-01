@@ -1,0 +1,258 @@
+//Group 1: Alex Budke, Ben Cohen, Jose Banda
+//Written by Alex Budke, Edited by Ben Cohen 12-1-2016
+//Inheritance Program
+//This program will show the features of inheretance using c++
+
+#include <iostream>
+#include <limits>
+#include <math.h>
+
+using namespace std;
+
+//Basic class which will be used by the remaining ones
+class Shape{
+	private:
+		double Area, Perimeter;
+	public:
+		void setPerimeter(double P){Perimeter = P;}
+		void setArea(double A){Area = A;}
+		double getPerimeter() const {return Perimeter;};
+		double getArea() const {return Area;};
+};
+
+//Part of Shape
+class Circle: public Shape{
+	private:
+		double radius;
+	public:
+		Circle(double rad);
+};
+
+//Another part of Shape
+class Triangle: public Shape{
+	private:
+		double side1, side2, side3;
+		double base, height;
+	public:
+		Triangle(double b, double h);
+		Triangle(double s1, double s2, double s3);
+};
+
+//Another part of Shape
+class Quadrilateral: public Shape{};
+
+//Part of Quadrilateral which is part of shape
+class Rectangle: public Quadrilateral{
+	private:
+		double length, width;
+	public:
+		Rectangle(double l, double w);
+};
+
+//Part of Quadrilateral which is part of shape
+class Trapezoid: public Quadrilateral{
+	private:
+		double base1, base2, height;
+	public:
+		Trapezoid(double b1, double b2, double h);
+};
+
+//Circle Constructor
+Circle::Circle(double rad){
+	setArea(3.1415*(rad*rad)); 
+	setPerimeter(2*3.1415*rad);
+}
+
+//Triangle constructor
+Triangle::Triangle(double b, double h){
+	setArea(0.5*b*h);
+	setPerimeter((sqrt(pow(b,2) + pow(h,2)) * 2) + b);
+}
+
+//Overloaded Triangle constructor
+Triangle::Triangle(double s1, double s2, double s3){
+	setArea(sqrt(pow(s3,2) - pow(s2,2)) * s2);
+	setPerimeter(s1+s2+s3);
+}
+
+//Rectangle constructor
+Rectangle::Rectangle(double l, double w){
+	setArea(l*w);
+	setPerimeter(2*l+2*w);
+}
+
+//Trapezoid constructor
+Trapezoid::Trapezoid(double b1, double b2, double h){
+  double P; //Perimeter helper variable
+	setArea(((b1+b2)/2) * h);
+	if (b2 > b1){
+	  P = sqrt(pow(((b2 - b1) / 2),2) + pow(h,2)) * 2 + b1 + b2;
+	}
+	else{
+	  P = sqrt(pow(((b1 - b2) / 2),2) + pow(h,2)) * 2 + b1 + b2;
+	}
+	
+	setPerimeter(P);
+}
+
+
+//error checking for inputs
+void cinCheck(){
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+}
+bool cinCheck2(){//check for the actual calculation number inputs
+  if (cin.fail()){
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "An Input was Incorrect." << endl;
+    return false;
+  }
+  else
+    return true;
+}
+
+
+int main(){
+	
+	
+	//initialize varibles
+	int cont;
+	int bad_input, choice2;
+	int shape_choice;
+	int input1, input2, input3;
+	int quit;
+	double area, perim;
+	
+	//inputs
+	do{
+	
+	quit = 0;
+	
+	cout << "Choose a shape. (1-Circle, 2-Triangle, 3-Rectangle, 4-Trapezoid)." << endl;
+	cin >> shape_choice;
+	cinCheck();
+	
+	//more inputs and run calculations
+	switch(shape_choice){
+		case 1:
+		{
+		  do{
+			  cout << "Input the radius of your Circle.\nRadius = ";
+			  cin >> input1;
+			}while(!cinCheck2());//input checking
+			Circle Cir = Circle(input1);
+			area = Cir.getArea();
+			perim = Cir.getPerimeter();
+			cinCheck();
+			cout << "The Area of your Circle is " << area << endl;
+			cout << "The Perimeter of your Circle is " << perim << endl;
+			break;
+		}
+		case 2:
+		{
+			do{
+			bad_input = 0;
+			
+			cout << "Do you know, base and height(1) OR 3 sides(2)?" << endl;
+			cin >> choice2;
+			cinCheck();
+			switch(choice2){
+				case 1:
+				{
+				  do{
+					  cout << "Input the Base of your Triangle.\nBase = ";
+					  cin >> input1;
+					  cout << "Height = ";
+					  cin >> input2;
+					}while(!cinCheck2()); //input checking
+					Triangle Tri = Triangle(input1, input2);
+					area = Tri.getArea();
+					perim = Tri.getPerimeter();
+					cinCheck();
+					cout << "The Area of your Triangle is " << area << endl;
+					cout << "The Perimeter of your Triangle is " << perim << endl;
+					break;
+				}
+				case 2:
+				{
+				  do{
+					  cout << "Input the three sides of the Triangle.\nSide #1 = ";
+					  cin >> input1;
+					  cout << "Side #2 = ";
+					  cin >> input2;
+					  cout << "Side #3 = ";
+					  cin >> input3;
+					}while(!cinCheck2()); //input checking
+					Triangle Tri = Triangle(input1, input2, input3);
+					area = Tri.getArea();
+					perim = Tri.getPerimeter();
+					cinCheck();
+					cout << "The Area of your Triangle is " << area << endl;
+					cout << "The Perimeter of your Triangle is " << perim << endl;
+					break;
+				}
+				default:
+					cout << "That's not a choice. Try Again." << endl;
+					bad_input = 1;
+					break;
+			}
+			}while(bad_input);
+			break;
+		}
+		case 3:
+		{
+		  do{
+			  cout << "Input the base and height of your Rectangle.\nBase = ";
+			  cin >> input1;
+			  cout << "Height = ";
+			  cin >> input2;
+			}while(!cinCheck2());//input checking
+			Rectangle Rect = Rectangle(input1,input2);
+			area = Rect.getArea();
+			perim = Rect.getPerimeter();
+			cinCheck();
+			cout << "The Area of your Rectangle is " << area << endl;
+			cout << "The Perimeter of your Rectangle is " << perim << endl;
+			break;
+		}
+		case 4:
+		{
+		  do{
+			  cout << "Input Both bases and the height of your Trapezoid\nBase #1 = ";
+			  cin >> input1;
+			  cout << "Base #2 = ";
+			  cin >> input2;
+			  cout << "Height = ";
+			  cin >> input3;
+			}while(!cinCheck2());//input checking
+			Trapezoid Trap = Trapezoid(input1,input2,input3);
+			area = Trap.getArea();
+			perim = Trap.getPerimeter();
+			cinCheck();
+			cout << "The Area of your Trapezoid is " << area << endl;
+			cout << "The Perimeter of your Trapezoid is " << perim << endl;
+			break;
+		}
+		default:
+			cout << "That is not a real choice. Try Again." << endl;
+			quit = 1;
+			break;
+	}
+	
+	if(quit == 0){
+		do{
+		
+		cout << "Continue for more shapes? YES (1) or NO (0) ";
+		cin >> cont;
+		cinCheck();
+		if(cont == 1){
+			quit = 1;
+		}
+		
+		}while(!(cont == 0||cont == 1));
+	}
+	
+	}while(quit);
+	
+}

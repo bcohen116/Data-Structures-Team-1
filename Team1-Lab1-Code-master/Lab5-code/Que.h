@@ -1,0 +1,27 @@
+//Group 1: Ben Cohen, Alex Budke, Jose Banda.
+//Header file for the Queue
+//Written by Alex Budke and Ben Cohen
+#ifndef Que_H
+ #define Que_H
+ 
+ class circular_Queue{
+   private:
+     int head;    //Need to track the begining of the circle
+     int tail;
+     char arry[4];   //This is the Queue
+   public:
+     //Method Declarations
+     circular_Queue(int a);
+     int getSize();
+     char dequeue();
+     void enqueue(char ch);
+     bool isEmpty();
+     bool isFull();
+     void printQueue();
+ };
+// This is the end of the header guard
+#endif /* CIRCULARQUEUE_H */
+
+
+
+

@@ -1,0 +1,272 @@
+#ifndef HW1_TEST_H
+#define HW1_TEST_H
+
+#include <iostream>
+#include <cxxtest/TestSuite.h>
+
+#include "hw1_1.cpp"
+
+using namespace std;
+
+
+class MyTests : public CxxTest::TestSuite {
+public:
+  void testSum1() {
+    int a[] = {1,2,3};
+    TS_ASSERT_EQUALS(arrSum(a, 3), 6);
+  }
+  
+  void testSum2() {
+    int a[] = {};
+    TS_ASSERT_EQUALS(arrSum(a, 0), 0);
+  }
+  
+  void testSum3() {
+    int a[] = {1,5,-6,10,-30,12};
+    TS_ASSERT_EQUALS(arrSum(a, 6), -8);
+  }
+  
+  void testSum4() {
+    int a[6] = {0,6,3,-4,5};
+    TS_ASSERT_EQUALS(arrSum(a,6), 10);
+  }
+  
+  void testMean1(){
+    int a[] = {};
+    TS_ASSERT_DELTA(arrMean(a,0), 0, 0.001);
+  }
+  
+  void testMean2(){
+    int a[] = {8,4,0,9,10};
+    TS_ASSERT_DELTA(arrMean(a,5), 6.2, 0.001);
+  }
+  
+  void testMean3(){
+    int a[] = {-5,-6,4,7};
+    TS_ASSERT_DELTA(arrMean(a,4), 0, 0.001);
+  }
+  
+  void testMean4(){
+    int a[5] = {-5,-5,-5,-5};
+    TS_ASSERT_DELTA(arrMean(a,5), -4, 0.001);
+  }
+  
+  void testMin1() {
+    int a[] = {1,5,-6,10,-30,12};
+    TS_ASSERT_EQUALS(arrMin(a, 6), -30);
+  }
+  
+  void testMin2() {
+    int a[] = {};
+    TS_ASSERT_EQUALS(arrMin(a, 0), 0);
+  }
+  
+  void testMin3() {
+    int a[] = {-5,-5,-5,-5,-5};
+    TS_ASSERT_EQUALS(arrMin(a, 5), -5);
+  }
+  
+  void testMin4() {
+    int a[6] = {5,4,8,9,10};
+    TS_ASSERT_EQUALS(arrMin(a, 6), 0);
+  }
+  
+  void testMax1() {
+    int a[6] = {5,4,8,9,10};
+    TS_ASSERT_EQUALS(arrMax(a, 6), 10);
+  }
+  
+  void testMax2() {
+    int a[] = {};
+    TS_ASSERT_EQUALS(arrMax(a, 0), 0);
+  }
+  
+  void testMax3() {
+    int a[5] = {10,5,-6,9,7};
+    TS_ASSERT_EQUALS(arrMax(a, 5), 10);
+  }
+  
+  void testMax4() {
+    int a[5] = {7,9,-6,5,10};
+    TS_ASSERT_EQUALS(arrMax(a, 5), 10);
+  }
+  
+  void testStd1() { 
+    int a[4] = {10,11,13,12};
+    TS_ASSERT_DELTA(arrStdDev(a,4), 1.118, 0.0001);
+  }
+  
+  void testStd2() { 
+    int a[5] = {10,11,13,12};
+    TS_ASSERT_DELTA(arrStdDev(a,5), 4.7074, 0.0001);
+  }
+  
+  void testStd3() { 
+    int a[] = {};
+    TS_ASSERT_DELTA(arrStdDev(a,0), 0.0, 0.0001);
+  }
+  
+  void testStd4() { 
+    int a[5] = {-5,-5,-5,-5,-5};
+    TS_ASSERT_DELTA(arrStdDev(a,5), 0.0, 0.0001);
+  }
+  
+  void testPrime1() {
+    TS_ASSERT_EQUALS(isPrime(5),true);
+  }  
+  
+  void testPrime2() {
+    TS_ASSERT_EQUALS(isPrime(15),false);
+  }  
+  
+  void testPrime3() {
+    TS_ASSERT_EQUALS(isPrime(-5),false);
+  }  
+  
+  void testPrime4() {
+    TS_ASSERT_EQUALS(isPrime(0),false);
+  }  
+  
+  void testNumPrimes1() {
+    int a[5] = {1,2,3,4,5};
+    TS_ASSERT_EQUALS(arrNumPrimes(a,5), 3); 
+  }
+
+  void testNumPrimes2() {
+    int a[5] = {1,0,-3,4,-5};
+    TS_ASSERT_EQUALS(arrNumPrimes(a,5), 0); 
+  }
+
+  void testNumPrimes3() {
+    int a[] = {};
+    TS_ASSERT_EQUALS(arrNumPrimes(a,0), 0); 
+  }
+  
+  void testNumPrimes4() {
+    int a[5] = {15,18,9,10,4};
+    TS_ASSERT_EQUALS(arrNumPrimes(a,5), 0); 
+  }
+
+  void testSetSize1() {
+    int a[] = {};
+    TS_ASSERT_EQUALS(arrSetSize(a,0), 0);
+  }
+  
+  void testSetSize2() {
+    int a[5] = {1,2,3,4,5};
+    TS_ASSERT_EQUALS(arrSetSize(a,5), 5); 
+  }
+  
+  void testSetSize3() {
+    int a[5] = {1,2,3,2,1};
+    TS_ASSERT_EQUALS(arrSetSize(a,5), 3); 
+  }
+  
+  void testSetSize4() {
+    int a[5] = {1,2,0,2,1};
+    TS_ASSERT_EQUALS(arrSetSize(a,5), 3); 
+  }
+
+  void testNumCount1(){
+    int a[] = {0,0,0,0,0};
+    TS_ASSERT_EQUALS(arrNumCount(a,5,1),0);
+  }
+  
+  void testNumCount2(){
+    int a[] = {0,0,0,0,0};
+    TS_ASSERT_EQUALS(arrNumCount(a,5,0),5);
+  }
+
+  void testNumCount3(){
+    int a[] = {1,2,1,2,1};
+    TS_ASSERT_EQUALS(arrNumCount(a,5,2),2);
+  }
+  
+  void testNumCount4(){
+    int a[] = {};
+    TS_ASSERT_EQUALS(arrNumCount(a,0,0),0);
+  }
+ 
+  void testNumBetween1(){
+    int a[] = {1,5,6,7,4};
+    TS_ASSERT_EQUALS(arrNumBetween(a,5,5,8),2);
+  }
+  
+  void testNumBetween2(){
+    int a[] = {};
+    TS_ASSERT_EQUALS(arrNumBetween(a,0,8,5),0);
+  }
+  
+  void testNumBetween3(){
+    int a[] = {1,5,6,7,4};
+    TS_ASSERT_EQUALS(arrNumBetween(a,5,8,10),0);
+  }
+  
+  void testNumBetween4(){
+    int a[] = {8,21,9,7,18};
+    TS_ASSERT_EQUALS(arrNumBetween(a,5,8,10),1);
+  }
+  
+  void testRev1(){
+    int a[] = {1,2,3,4,5};
+    arrReverse(a,5);
+    TS_ASSERT_EQUALS(a[0],5);
+    TS_ASSERT_EQUALS(a[1],4);
+    TS_ASSERT_EQUALS(a[2],3);
+    TS_ASSERT_EQUALS(a[3],2);
+    TS_ASSERT_EQUALS(a[4],1);
+  }
+  
+  void testRev2(){
+    int a[] = {0,1,0,1,0};
+    arrReverse(a,5);
+    TS_ASSERT_EQUALS(a[0],0);
+    TS_ASSERT_EQUALS(a[1],1);
+    TS_ASSERT_EQUALS(a[2],0);
+    TS_ASSERT_EQUALS(a[3],1);
+    TS_ASSERT_EQUALS(a[4],0);
+  }
+  
+  void testRev3(){
+    int a[] = {21,5,6,36,7};
+    arrReverse(a,5);
+    TS_ASSERT_EQUALS(a[0],7);
+    TS_ASSERT_EQUALS(a[1],36);
+    TS_ASSERT_EQUALS(a[2],6);
+    TS_ASSERT_EQUALS(a[3],5);
+    TS_ASSERT_EQUALS(a[4],21);
+  }
+  
+  void testRev4(){
+    int a[] = {1,1,1,1,1};
+    arrReverse(a,5);
+    TS_ASSERT_EQUALS(a[0],1);
+    TS_ASSERT_EQUALS(a[1],1);
+    TS_ASSERT_EQUALS(a[2],1);
+    TS_ASSERT_EQUALS(a[3],1);
+    TS_ASSERT_EQUALS(a[4],1);
+  }
+  
+  void testFind1(){;
+    int a[] = {1,5,8,9,7,6,10,11};
+    TS_ASSERT_EQUALS(arrFind(a,8,7,2),4);
+  }
+  
+  void testFind2(){;
+    int a[] = {1,5,8,9,7,6,10,11};
+    TS_ASSERT_EQUALS(arrFind(a,8,7,7),-1);
+  }
+  
+  void testFind3(){;
+    int a[] = {1,5,8,9,7,6,10,11};
+    TS_ASSERT_EQUALS(arrFind(a,8,10,1),6);
+  }
+  
+  void testFind4(){;
+    int a[] = {1,5,8,9,7,6,10,11};
+    TS_ASSERT_EQUALS(arrFind(a,8,10,8),-1);
+  }
+
+};
+
+#endif
